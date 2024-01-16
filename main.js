@@ -51,17 +51,6 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 var scene = new THREE.Scene();
 // scene.background=new THREE.TextureLoader().load("src/StandardCubeMap.png");
 
-//===================================================== CUBE MAP
-// Create a CubeTextureLoader
-var CubeLoader = new THREE.CubeTextureLoader();
-
-// Load the cubemap
-var cubeMap = CubeLoader.load([
-  'src/Standard-Cube-Map/px.png', 'src/Standard-Cube-Map/nx.png',
-  'src/Standard-Cube-Map/py.png', 'src/Standard-Cube-Map/ny.png',
-  'src/Standard-Cube-Map/pz.png', 'src/Standard-Cube-Map/nz.png'
-]);
-
 // Set the scene background to the cubemap
 // scene.background = cubeMap;
 //===================================================== Create a perpsective camera
@@ -88,7 +77,7 @@ var far = 1000;
 scene.fog = new THREE.Fog(fogColor, near, far);
 //===================================================== Create a Mesh
 const loader = new THREE.TextureLoader();
-const src = "src/room360.jpg";
+const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.1/src/room360.jpg";
 loader.load(src, (texture) => {
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.x = -1;
