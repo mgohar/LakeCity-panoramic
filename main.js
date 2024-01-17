@@ -77,7 +77,7 @@ var far = 1000;
 scene.fog = new THREE.Fog(fogColor, near, far);
 //===================================================== Create a Mesh
 const loader = new THREE.TextureLoader();
-// const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.1/src/room360.jpg";
+// const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.3/src/lakecity.jpg";
 // const src = "src/room.jpg";
 // const src = "src/office.jpeg";
 const src = "src/lakecity.jpg";
