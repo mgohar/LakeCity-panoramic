@@ -54,15 +54,15 @@ var scene = new THREE.Scene();
 // Set the scene background to the cubemap
 // scene.background = cubeMap;
 //===================================================== Create a perpsective camera
-var camera = new THREE.PerspectiveCamera(55, WIDTH / HEIGHT, 0.001, 1000);
+var camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 0.001, 1000);
 camera.position.z = 0.5;
 
 //===================================================== Orbit Controls
 const orbitControls = new OrbitControls(camera, canvas);
-orbitControls.enableDamping = true;
-orbitControls.enableZoom = false;
-orbitControls.minPolarAngle = Math.PI / 3;
+// orbitControls.enableZoom = false;
+// orbitControls.minPolarAngle = Math.PI / 3;
 
+orbitControls.rotateSpeed=-1;
 //===================================================== Resize
 window.addEventListener("resize", function () {
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -77,7 +77,10 @@ var far = 1000;
 scene.fog = new THREE.Fog(fogColor, near, far);
 //===================================================== Create a Mesh
 const loader = new THREE.TextureLoader();
-const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.1/src/room360.jpg";
+// const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.1/src/room360.jpg";
+// const src = "src/room.jpg";
+// const src = "src/office.jpeg";
+const src = "src/lakecity.jpg";
 loader.load(src, (texture) => {
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.x = -1;
@@ -90,18 +93,14 @@ loader.load(src, (texture) => {
       imageTexture: { value: texture  },
     },
   });
-  // const material = new THREE.MeshBasicMaterial({
-  //     map: texture,
-  //     side: THREE.BackSide,
-  //     reflectivity: 0,
-  // });
   const sphere = new THREE.Mesh(geometry, material);
 
   scene.add(sphere);
   sphere.rotation.set(1.37,0,0);
   gsap.to(sphere.rotation,{x:0,duration:1.5,ease:"inOut",delay:2})
   gsap.to(camera.position,{z:0.1,duration:1.5,ease:"inOut",delay:2})
-  gsap.to(sphere.rotation,{y:3,duration:1.5,ease:"inOut",delay:2})
+  gsap.to(sphere.rotation,{y:1,duration:1.5,ease:"inOut",delay:2})
+  gsap.to(orbitControls,{autoRotate:true,delay:3})
 });
 //===================================================== Create a point light in our scene
 var ambientLight = new THREE.AmbientLight("#ffffff", 100);
@@ -112,6 +111,8 @@ scene.add(ambientLight);
 const clock = new THREE.Clock();
 function Animation() {
   const elapsedTime = clock.getElapsedTime();
+
+  orbitControls.update();
   renderer.render(scene, camera);
   requestAnimationFrame(Animation);
 }
