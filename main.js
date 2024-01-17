@@ -59,7 +59,7 @@ camera.position.z = 0.5;
 
 //===================================================== Orbit Controls
 const orbitControls = new OrbitControls(camera, canvas);
-// orbitControls.enableZoom = false;
+orbitControls.enableZoom = false;
 // orbitControls.minPolarAngle = Math.PI / 3;
 
 orbitControls.rotateSpeed=-1;
@@ -77,10 +77,10 @@ var far = 1000;
 scene.fog = new THREE.Fog(fogColor, near, far);
 //===================================================== Create a Mesh
 const loader = new THREE.TextureLoader();
-// const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.3/src/lakecity.jpg";
+const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.4/src/lakecity.JPG";
 // const src = "src/room.jpg";
 // const src = "src/office.jpeg";
-const src = "src/lakecity.jpg";
+// const src = "src/lakecity.jpg";
 loader.load(src, (texture) => {
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.x = -1;
