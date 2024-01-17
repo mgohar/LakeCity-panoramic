@@ -59,10 +59,14 @@ camera.position.z = 0.5;
 
 //===================================================== Orbit Controls
 const orbitControls = new OrbitControls(camera, canvas);
+orbitControls.enabled = false;
 orbitControls.enableZoom = false;
-// orbitControls.minPolarAngle = Math.PI / 3;
-
+orbitControls.enableDamping = true;
+orbitControls.dampingFactor = 0.25;
 orbitControls.rotateSpeed=-1;
+orbitControls.target.set(0, 0, 0);
+orbitControls.enableRotate = true;
+
 //===================================================== Resize
 window.addEventListener("resize", function () {
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -77,10 +81,10 @@ var far = 1000;
 scene.fog = new THREE.Fog(fogColor, near, far);
 //===================================================== Create a Mesh
 const loader = new THREE.TextureLoader();
-const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.4/src/lakecity.JPG";
+// const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.4/src/lakecity.JPG";
 // const src = "src/room.jpg";
 // const src = "src/office.jpeg";
-// const src = "src/lakecity.jpg";
+const src = "src/lakecity_new.jpg";
 loader.load(src, (texture) => {
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.x = -1;
@@ -99,8 +103,10 @@ loader.load(src, (texture) => {
   sphere.rotation.set(1.37,0,0);
   gsap.to(sphere.rotation,{x:0,duration:1.5,ease:"inOut",delay:2})
   gsap.to(camera.position,{z:0.1,duration:1.5,ease:"inOut",delay:2})
-  gsap.to(sphere.rotation,{y:1,duration:1.5,ease:"inOut",delay:2})
+  gsap.to(sphere.rotation,{y:3,duration:1.5,ease:"inOut",delay:2})
   gsap.to(orbitControls,{autoRotate:true,delay:3})
+  gsap.to(orbitControls,{enabled:true,delay:3})
+    
 });
 //===================================================== Create a point light in our scene
 var ambientLight = new THREE.AmbientLight("#ffffff", 100);
@@ -112,9 +118,10 @@ const clock = new THREE.Clock();
 function Animation() {
   const elapsedTime = clock.getElapsedTime();
 
-  orbitControls.update();
+
   renderer.render(scene, camera);
   requestAnimationFrame(Animation);
+  orbitControls.update();
 }
 
 Animation();
