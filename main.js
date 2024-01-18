@@ -81,10 +81,10 @@ var far = 1000;
 scene.fog = new THREE.Fog(fogColor, near, far);
 //===================================================== Create a Mesh
 const loader = new THREE.TextureLoader();
-// const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.7/src/lakecity.JPG";
+const src = "https://cdn.jsdelivr.net/gh/mgohar/LakeCity-panoramic@v0.0.9/src/lakecity_edited.JPG";
 // const src = "src/room.jpg";
 // const src = "src/office.jpeg";
-const src = "src/lakecity_edited.JPG";
+// const src = "src/lakecity_edited.JPG";
 loader.load(src, (texture) => {
   texture.wrapS = THREE.RepeatWrapping;
   texture.repeat.x = -1;
